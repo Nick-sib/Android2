@@ -10,6 +10,4 @@
     <string name="s_mi_email">Feedback / Cellback</string>
     <string name="s_fab_city">Change city</string>
     <string name="s_fab_apply">Save changes</string>
-    <string name="s_bar_student_name" translatable="false">Николай Карпик</string>
-    <string name="s_bar_student_email" translatable="false">khc1981@mail.com</string>
 </resources>
