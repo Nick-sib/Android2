@@ -152,6 +152,8 @@ class MainActivity:  AppCompatActivity() {
                 bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
             }
             R.id.mi_city_list -> showSnackMessage(resources.getText(R.string.s_mi_city_list))
+            R.id.mi_back -> {//не изменять список городов
+                changeFragment(0)}
             else -> showSnackMessage(item.title)
         }
         return true
