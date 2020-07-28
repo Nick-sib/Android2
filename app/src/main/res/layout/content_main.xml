@@ -32,6 +32,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.nickolay.dellme.customview.TempHimbView
+            android:id="@+id/viewSensorValue"
+            android:layout_width="93dp"
+            android:layout_height="54dp"
+            android:layout_margin="5dp"
+            app:autohide="false"
+            app:color="@android:color/primary_text_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/screen_label"

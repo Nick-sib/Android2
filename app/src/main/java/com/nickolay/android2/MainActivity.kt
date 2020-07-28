@@ -1,9 +1,12 @@
 package com.nickolay.android2
 
 import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,6 +24,8 @@ const val THEME_LIGHT = 0
 const val THEME_DARK = 1
 
 class MainActivity:  AppCompatActivity() {
+
+    private lateinit var mSensorManager: SensorManager
 
     private var isDark = false
     private val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
@@ -82,6 +87,12 @@ class MainActivity:  AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+            viewSensorValue.SensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+            viewSensorValue.SensorHimidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) // requires API level 14.
+        }
+
         initTheme()
 
         setSupportActionBar(bottom_app_bar)
@@ -127,6 +138,18 @@ class MainActivity:  AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        mSensorManager.registerListener(viewSensorValue, viewSensorValue.SensorTemperature, SensorManager.SENSOR_DELAY_NORMAL)
+        mSensorManager.registerListener(viewSensorValue, viewSensorValue.SensorHimidity,    SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mSensorManager.unregisterListener(viewSensorValue)
+    }
+
     private fun BottomAppBar.toggleFabAlignment() {
         currentFabAlignmentMode = fabAlignmentMode
         fabAlignmentMode = currentFabAlignmentMode.xor(1)
@@ -156,6 +179,7 @@ class MainActivity:  AppCompatActivity() {
                 changeFragment(0)}
             else -> showSnackMessage(item.title)
         }
+
         return true
     }
 
