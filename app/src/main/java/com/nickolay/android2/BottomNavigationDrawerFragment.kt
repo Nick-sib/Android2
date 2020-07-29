@@ -2,14 +2,11 @@ package com.nickolay.android2
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.core.view.get
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -32,7 +29,7 @@ class BottomNavigationDrawerFragment(val main: MainActivity): BottomSheetDialogF
 
         //navigation_view.menu.getItem(2).isChecked = true
 
-        navigation_view.setNavigationItemSelectedListener { menuItem ->
+        navigationView.setNavigationItemSelectedListener { menuItem ->
             // Bottom Navigation Drawer menu item clicks
             when (menuItem.itemId) {
                 R.id.mi_city_list -> {// Переопределить список городов
@@ -49,39 +46,41 @@ class BottomNavigationDrawerFragment(val main: MainActivity): BottomSheetDialogF
         val onFeedBackCall: View.OnClickListener = View.OnClickListener {
             showToastMessage("ABOUT")
         }
-        tv_email.setOnClickListener(onFeedBackCall)
-        tv_name.setOnClickListener(onFeedBackCall)
-        iv_avatar.setOnClickListener(onFeedBackCall)
+        tvEmail.setOnClickListener(onFeedBackCall)
+        tvName.setOnClickListener(onFeedBackCall)
+        ivAvatar.setOnClickListener(onFeedBackCall)
 
-        close_imageview.setOnClickListener {
+        closeImageview.setOnClickListener {
             this.dismiss()
         }
-        disableNavigationViewScrollbars(navigation_view)
+        disableNavigationViewScrollbars(navigationView)
 
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
 
-        dialog.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
+        dialog.setOnShowListener {
+            val d = it as BottomSheetDialog
 
             val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout?
             val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet!!)
-            bottomSheetBehavior.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
+            bottomSheetBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     if (slideOffset > 0.5) {
-                        close_imageview.visibility = View.VISIBLE
+                        closeImageview.visibility = View.VISIBLE
                     } else {
-                        close_imageview.visibility = View.GONE
+                        closeImageview.visibility = View.GONE
                     }
                 }
 
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_HIDDEN-> dismiss()
-//                        else -> close_imageview.visibility = View.GONE
-                    }
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN)
+                        dismiss()
+//                    when (newState) {
+//                        BottomSheetBehavior.STATE_HIDDEN-> dismiss()
+//                        //else -> closeImageview.visibility = View.GONE
+//                    }
                 }
             })
         }
