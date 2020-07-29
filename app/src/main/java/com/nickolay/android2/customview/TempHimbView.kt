@@ -17,33 +17,36 @@ import kotlin.math.min
 class TempHimbView:
     View,
     SensorEventListener {
-    var charTemp = "\uD83C\uDF21"
-    var charHimb = "\uD83D\uDCA7"
+    var charTemp = "\uD83C\uDF21" //нет конечного решения это переменная или изменяемая константа
+    var charHimb = "\uD83D\uDCA7" //нет конечного решения это переменная или изменяемая константа
     var color = Color.BLACK
     private var realWidth = 2f
     private var realHeigh = 2f
-    private var paint = Paint()
+    private var paint = Paint().apply {
+                    style = Paint.Style.FILL
+                    textSize = 30f
+                }
     private var autohide = false
     private var yTemp = 0f
     private var yHimd = 0f
     private var xText = 0f
-    private var valTemp = 0f
-    private var valHimd = 0f
+    private var val_temp = 0f
+    private var val_himd = 0f
 
-    var SensorTemperature: Sensor? = null
+    var sensorTemperature: Sensor? = null
         set(value) {
             Log.d("myLOG", "ST $value")
             field = value
-            visibility = if (value == null && SensorHimidity == null && autohide)
+            visibility = if (value == null && sensorHimidity == null && autohide)
                 GONE
             else
                 VISIBLE
         }
 
-    var SensorHimidity: Sensor? = null
+    var sensorHimidity: Sensor? = null
         set(value) {
             field = value
-            visibility = if (value == null && SensorHimidity == null && autohide)
+            visibility = if (value == null && sensorHimidity == null && autohide)
                 GONE
             else
                 VISIBLE
@@ -51,9 +54,8 @@ class TempHimbView:
 
     constructor(context: Context) : this(context, null) {
         paint.color = color
-        paint.style = Paint.Style.FILL
-        paint.textSize = 30f
     }
+
     constructor(context: Context, attrs: AttributeSet?): super(context, attrs, 0) {
         val styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.TempHimbView,0, 0)
         try {
@@ -71,7 +73,7 @@ class TempHimbView:
         paint.textSize = min(realWidth, realHeigh) / 3
 
         yTemp = paint.textSize
-        if (SensorTemperature == null) {
+        if (sensorTemperature == null) {
             yHimd = paint.textSize * 1.2f
         } else{
             yHimd = paint.textSize * 2.5f
@@ -81,13 +83,13 @@ class TempHimbView:
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (SensorTemperature != null || !autohide){
+        if (sensorTemperature != null || !autohide){
             canvas.drawText(charHimb, 0f, paint.textSize, paint)
-            canvas.drawText(String.format("%.1f°C", valTemp), xText, yTemp, paint)
+            canvas.drawText(String.format("%.1f°C", val_temp), xText, yTemp, paint)
         }
-        if (SensorHimidity != null || !autohide){
+        if (sensorHimidity != null || !autohide){
         canvas.drawText(charTemp, 0f, paint.textSize * 2.5f, paint)
-        canvas.drawText("%.1f".format(valHimd) + " %", xText, yHimd, paint)
+        canvas.drawText("%.1f".format(val_himd) + " %", xText, yHimd, paint)
         }
     }
 
@@ -98,13 +100,13 @@ class TempHimbView:
     override fun onSensorChanged(event: SensorEvent) {
         when (event.sensor.type) {
             Sensor.TYPE_AMBIENT_TEMPERATURE ->
-                if (valTemp != event.values[0]) {
-                    valTemp = event.values[0]
+                if (val_temp != event.values[0]) {
+                    val_temp = event.values[0]
                     invalidate()
                 }
             Sensor.TYPE_RELATIVE_HUMIDITY ->
-                if (valHimd != event.values[0]) {
-                    valHimd = event.values[0]
+                if (val_himd != event.values[0]) {
+                    val_himd = event.values[0]
                     invalidate()
                 }
         }

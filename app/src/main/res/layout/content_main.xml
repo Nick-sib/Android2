@@ -37,7 +37,7 @@
             android:layout_width="93dp"
             android:layout_height="54dp"
             android:layout_margin="5dp"
-            app:autohide="false"
+            app:autohide="true"
             app:color="@android:color/primary_text_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

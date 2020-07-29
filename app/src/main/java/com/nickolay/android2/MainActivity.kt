@@ -6,7 +6,6 @@ import android.hardware.SensorManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -89,8 +88,8 @@ class MainActivity:  AppCompatActivity() {
 
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-            viewSensorValue.SensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
-            viewSensorValue.SensorHimidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) // requires API level 14.
+            viewSensorValue.sensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+            viewSensorValue.sensorHimidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) // requires API level 14.
         }
 
         initTheme()
@@ -141,8 +140,8 @@ class MainActivity:  AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        mSensorManager.registerListener(viewSensorValue, viewSensorValue.SensorTemperature, SensorManager.SENSOR_DELAY_NORMAL)
-        mSensorManager.registerListener(viewSensorValue, viewSensorValue.SensorHimidity,    SensorManager.SENSOR_DELAY_NORMAL)
+        mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorTemperature, SensorManager.SENSOR_DELAY_NORMAL)
+        mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorHimidity,    SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
