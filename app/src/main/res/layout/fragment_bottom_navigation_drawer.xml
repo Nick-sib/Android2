@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_view_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,7 +9,7 @@
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -18,11 +18,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine"
         app:menu="@menu/bottom_nav_drawer_menu" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -32,31 +32,32 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
         android:text="@string/s_bar_student_email"
         android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <ImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/ivAvatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/circle_logo"
+        android:contentDescription="@string/s_bar_student_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_name"
-        />
+        app:layout_constraintTop_toTopOf="@+id/tvName"/>
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/viewLine"
         android:layout_width="match_parent"
         android:layout_height="2dip"
         android:layout_marginTop="15dp"
@@ -64,10 +65,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
     <ImageView
-        android:id="@+id/close_imageview"
+        android:id="@+id/closeImageview"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="8dp"
@@ -75,8 +76,9 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_close_24"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_email"
+        android:contentDescription="@string/s_bar_close"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        app:layout_constraintTop_toTopOf="@+id/tvName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

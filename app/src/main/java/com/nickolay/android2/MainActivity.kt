@@ -16,8 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-const val PREFS_NAME = "com.nickolay.android2.MainActivity"
-const val PREFS_KEY = "theme"
+private const val PREFS_KEY = "theme"
 const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
@@ -27,7 +26,7 @@ class MainActivity:  AppCompatActivity() {
     private lateinit var mSensorManager: SensorManager
 
     private var isDark = false
-    private val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    private val sharedPrefs by lazy {  getSharedPreferences((MainActivity::class).qualifiedName, Context.MODE_PRIVATE) }
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(PREFS_KEY, theme).apply()
     private fun getSavedTheme() = sharedPrefs.getInt(PREFS_KEY, THEME_UNDEFINED)
 
@@ -39,14 +38,14 @@ class MainActivity:  AppCompatActivity() {
             1 -> {//changeCityList
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
-                bottom_app_bar.navigationIcon = null
-                screen_label.text = resources.getText(R.string.s_mi_city_list)
+                bottomAppBar.navigationIcon = null
+                screenLabel.text = resources.getText(R.string.s_mi_city_list)
             }
             else -> {
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
-                bottom_app_bar.navigationIcon = getDrawable(R.drawable.ic_menu_24)
-                screen_label.text = resources.getText(R.string.s_fragment_primary)
+                bottomAppBar.navigationIcon = getDrawable(R.drawable.ic_menu_24)
+                screenLabel.text = resources.getText(R.string.s_fragment_primary)
             }
         }
     }
@@ -57,7 +56,7 @@ class MainActivity:  AppCompatActivity() {
     }
 
     private fun initTheme() {
-        val menuItem = bottom_app_bar.menu.getItem(0)
+        val menuItem = bottomAppBar.menu.getItem(0)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P ||
                 menuItem.itemId != R.id.mi_theme) {
             return
@@ -77,7 +76,7 @@ class MainActivity:  AppCompatActivity() {
 
     fun showSnackMessage(text: CharSequence) {
         Snackbar.make(coordinatorLayout, text, Snackbar.LENGTH_SHORT)
-                .setAnchorView((if (fab.visibility == View.VISIBLE) fab else bottom_app_bar as View))
+                .setAnchorView((if (fab.visibility == View.VISIBLE) fab else bottomAppBar as View))
                 .show()
     }
 
@@ -86,21 +85,23 @@ class MainActivity:  AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        //Log.d("myLOG", "onCreate: ${(MainActivity::class).qualifiedName}")
+
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
             viewSensorValue.sensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
             viewSensorValue.sensorHimidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) // requires API level 14.
         }
 
         initTheme()
 
-        setSupportActionBar(bottom_app_bar)
+        setSupportActionBar(bottomAppBar)
 
         addVisibilityChanged = object : FloatingActionButton.OnVisibilityChangedListener() {
             override fun onHidden(fab: FloatingActionButton?) {
                 super.onHidden(fab)
-                bottom_app_bar.toggleFabAlignment()
-                bottom_app_bar.replaceMenu(
+                bottomAppBar.toggleFabAlignment()
+                bottomAppBar.replaceMenu(
                         if (currentFabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
                             R.menu.bottomappbar_menu_secondary
                         else R.menu.bottomappbar_menu_primary
@@ -129,7 +130,7 @@ class MainActivity:  AppCompatActivity() {
 //        }
 
         fab.setOnClickListener {
-            if (bottom_app_bar.fabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
+            if (bottomAppBar.fabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
                 showSnackMessage(resources.getText(R.string.s_fab_city))
             else
                 changeFragment(0)

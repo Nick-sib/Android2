@@ -35,7 +35,6 @@ class TempHimbView:
 
     var sensorTemperature: Sensor? = null
         set(value) {
-            Log.d("myLOG", "ST $value")
             field = value
             visibility = if (value == null && sensorHimidity == null && autohide)
                 GONE
