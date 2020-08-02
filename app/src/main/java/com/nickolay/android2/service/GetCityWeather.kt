@@ -17,6 +17,7 @@ class GetCityWeather: JobIntentService() {
         var stop = false
         fun enqueueWork(cxt: Context, intent: Intent) {
             stop = false
+
             enqueueWork(cxt, GetCityWeather::class.java, JOB_ID, intent)
         }
     }
