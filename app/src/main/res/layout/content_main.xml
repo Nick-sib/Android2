@@ -55,6 +55,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <Button
+            android:id="@+id/b_testJob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="doJob"
+            android:text="Test JOB"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/screenLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

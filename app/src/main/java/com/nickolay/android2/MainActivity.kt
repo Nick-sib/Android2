@@ -1,6 +1,7 @@
 package com.nickolay.android2
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Build
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.nickolay.android2.service.GetCityWeather
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -27,6 +29,7 @@ class MainActivity:  AppCompatActivity() {
 
     private var isDark = false
     private val sharedPrefs by lazy {  getSharedPreferences((MainActivity::class).qualifiedName, Context.MODE_PRIVATE) }
+
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(PREFS_KEY, theme).apply()
     private fun getSavedTheme() = sharedPrefs.getInt(PREFS_KEY, THEME_UNDEFINED)
 
@@ -181,6 +184,13 @@ class MainActivity:  AppCompatActivity() {
         }
 
         return true
+    }
+
+    fun doJob(view: View) {
+        val intent = Intent()
+        intent.putExtra("CountRepeat",10)
+        intent.putExtra("TimeDelay",(10 * 1000 as Long))
+        GetCityWeather.enqueueWork(this, intent)
     }
 
 
