@@ -190,7 +190,8 @@ class MainActivity:  AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intent = Intent()
             intent.putExtra("CountRepeat", 10)
-            intent.putExtra("TimeDelay", (10 * 1000 as Long))
+            intent.putExtra("TimeDelay", ((10 * 1000) as Long))
+
             GetCityWeather.enqueueWork(this, intent)
         } else {/*пока просто заглушка нужен интерактор*/}
     }
