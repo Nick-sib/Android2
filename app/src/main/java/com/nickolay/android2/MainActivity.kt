@@ -7,6 +7,7 @@ import android.hardware.SensorManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -88,7 +89,8 @@ class MainActivity:  AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        //Log.d("myLOG", "onCreate: ${(MainActivity::class).qualifiedName}")
+        //Log.d("myLOG", "onCreate: ${BuildConfig.WEATHER_API_KEY}")
+
 
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
@@ -190,7 +192,7 @@ class MainActivity:  AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intent = Intent()
             intent.putExtra("CountRepeat", 10)
-            intent.putExtra("TimeDelay", ((10 * 1000) as Long))
+            intent.putExtra("TimeDelay", (10 * 1000 as Long))
 
             GetCityWeather.enqueueWork(this, intent)
         } else {/*пока просто заглушка нужен интерактор*/}
