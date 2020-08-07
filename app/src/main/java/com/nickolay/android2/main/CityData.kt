@@ -1,14 +1,21 @@
 package com.nickolay.android2.main
 
+import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nickolay.android2.R
-
+import com.nickolay.android2.model.WeatherData
+import com.nickolay.android2.model.WeatherViewModel
+import com.nickolay.android2.service.CommonWeather
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.data_city.*
 import java.util.*
 
 
@@ -18,36 +25,59 @@ import java.util.*
 class
 CityData : Fragment()/*, OnItemListClick*/ {
 
-    //lateinit var viewModel: WeatherViewModel
+    lateinit var viewModel: WeatherViewModel
 
-    private val delmeData = DoubleArray(7)
     private lateinit var sHumidity: String
     private lateinit var sWind: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //viewModel = ViewModelProvider(activity!!).get(WeatherViewModel::class.java)
+        viewModel = ViewModelProvider(activity!!).get(WeatherViewModel::class.java)
+        viewModel.weatherData.observe(
+            this,
+            androidx.lifecycle.Observer {
+                compliteData(it)
+            })
+
 
 //        sHumidity = resources.getString(R.string.t_humidity)
 //        sWind = resources.getString(R.string.t_wind)
+
+        if (savedInstanceState == null) {
+            CommonWeather.getData(viewModel)
+        }
+
+
+    }
+
+    private fun compliteData(it: WeatherData) {
+//        val icon = "https://openweathermap.org/img/wn/${it.icon}@4x.png"
 //
-//        viewModel.weatherData.observe(
-//            this,
-//            androidx.lifecycle.Observer {
-//                compliteData(it)
+//        Picasso.get()!!
+//            .load(icon)
+//            .into(iv_Cloudiness, object : Callback {
+//                override fun onSuccess() {
+//                    Log.d("myLOG", "success")
+//                }
+//
+//                override fun onError(e: Exception?) {
+//                    Log.d("myLOG", "error")
+//                    Log.d("myLOG", e.toString())
+//                }
 //            })
-//
-//        if (savedInstanceState == null) {
-//            CommonWeather.getData(this, Handler(), DEFAULT_ID)
-//        }
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.data_city, container, false)
+
+        val uri = Uri.parse("https://openweathermap.org/img/wn/02d@4x.png")
+        Picasso.get()!!
+            .load(uri)
+            .into(root.findViewById<ImageView>(R.id.iv_Cloudiness))
 
 //        for (i in delmeData.indices) {
 //            delmeData[i] = 29 + (5 * random.nextDouble() - 3)
@@ -86,7 +116,6 @@ CityData : Fragment()/*, OnItemListClick*/ {
          * fragment.
          */
         private const val ARG_SECTION_NUMBER = "section_number"
-        private val random = Random()
 
         /**
          * Returns a new instance of this fragment for the given section

@@ -47,16 +47,16 @@
 
         app:layout_constraintTop_toBottomOf="@+id/tv_DayOfWeek"
         tools:text="Переменная облачность" />
-<!--пока всё еще заглушка-->
+
     <ImageView
         android:id="@+id/iv_Cloudiness"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="10dp"
 
 
         android:src="@drawable/ic_empty_24"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
 
         app:layout_constraintStart_toStartOf="@+id/tv_CityName"
         app:layout_constraintTop_toBottomOf="@+id/tv_Cloudiness" />
