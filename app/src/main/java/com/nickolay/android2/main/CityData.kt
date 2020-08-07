@@ -41,7 +41,7 @@ CityData : Fragment()/*, OnItemListClick*/ {
         sHumidity = resources.getString(R.string.t_humidity)
         sWind = resources.getString(R.string.t_wind)
         if (savedInstanceState == null) {
-            //CommonWeather.getData(viewModel)
+            CommonWeather.getData(WeatherViewModel.DEFAULT_ID, viewModel)
         }
 
 
@@ -77,7 +77,7 @@ CityData : Fragment()/*, OnItemListClick*/ {
         //val
         root = inflater.inflate(R.layout.data_city, container, false)
 
-        CommonWeather.getData(viewModel)
+       // CommonWeather.getData(viewModel)
 
         //compliteData(viewModel.weatherData.value!!)
 //        val uri = Uri.parse("https://openweathermap.org/img/wn/02d@4x.png")
