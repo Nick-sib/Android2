@@ -10,12 +10,11 @@ import java.util.*
 
 class WeatherViewModel: ViewModel() {
 
-    val adapter: CityListAdapter = CityListAdapter()
+    val adapter = CityListAdapter()
     val weatherData = MutableLiveData<WeatherData>()
 
 
     fun setWeatherData(weatherRequest: WeatherRequest) {
-
         val today = Calendar.getInstance().time
         weatherData.value = adapter.setData(weatherRequest, SimpleDateFormat("EEEE").format(today).capitalize())
     }

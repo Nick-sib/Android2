@@ -19,9 +19,6 @@ import kotlinx.android.synthetic.main.data_city.*
 import java.util.*
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
 class
 CityData : Fragment()/*, OnItemListClick*/ {
 
@@ -29,6 +26,7 @@ CityData : Fragment()/*, OnItemListClick*/ {
 
     private lateinit var sHumidity: String
     private lateinit var sWind: String
+    private lateinit var root: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,44 +38,52 @@ CityData : Fragment()/*, OnItemListClick*/ {
                 compliteData(it)
             })
 
-
-//        sHumidity = resources.getString(R.string.t_humidity)
-//        sWind = resources.getString(R.string.t_wind)
-
+        sHumidity = resources.getString(R.string.t_humidity)
+        sWind = resources.getString(R.string.t_wind)
         if (savedInstanceState == null) {
-            CommonWeather.getData(viewModel)
+            //CommonWeather.getData(viewModel)
         }
 
 
     }
 
-    private fun compliteData(it: WeatherData) {
-//        val icon = "https://openweathermap.org/img/wn/${it.icon}@4x.png"
-//
-//        Picasso.get()!!
-//            .load(icon)
-//            .into(iv_Cloudiness, object : Callback {
-//                override fun onSuccess() {
-//                    Log.d("myLOG", "success")
-//                }
-//
-//                override fun onError(e: Exception?) {
-//                    Log.d("myLOG", "error")
-//                    Log.d("myLOG", e.toString())
-//                }
-//            })
+    private fun compliteData(data: WeatherData) {
+        //val icon = "https://openweathermap.org/img/wn/${data.icon}@4x.png"
+        val uri = Uri.parse("https://openweathermap.org/img/wn/${data.icon}@4x.png")
+        Picasso.get()!!
+            .load(uri)
+            .into(root.findViewById<ImageView>(R.id.iv_Cloudiness), object : Callback {
+                override fun onSuccess() {
+                    Log.d("myLOG", "success")
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.d("myLOG", "error")
+                    Log.d("myLOG", e.toString())
+                }
+            })
+        tv_CityName.text = data.cityName
+        tv_DayOfWeek.text = data.dayWeek
+        tv_Cloudiness.text = data.overcast
+        tv_Temperature.text = data.temp.toString()
+        tv_Humidity.text = String.format(sHumidity, data.humidity, "%")
+        tv_Wind.text = String.format(sWind, data.wind)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.data_city, container, false)
+        //val
+        root = inflater.inflate(R.layout.data_city, container, false)
 
-        val uri = Uri.parse("https://openweathermap.org/img/wn/02d@4x.png")
-        Picasso.get()!!
-            .load(uri)
-            .into(root.findViewById<ImageView>(R.id.iv_Cloudiness))
+        CommonWeather.getData(viewModel)
+
+        //compliteData(viewModel.weatherData.value!!)
+//        val uri = Uri.parse("https://openweathermap.org/img/wn/02d@4x.png")
+//        Picasso.get()!!
+//            .load(uri)
+//            .into(root.findViewById<ImageView>(R.id.iv_Cloudiness))
 
 //        for (i in delmeData.indices) {
 //            delmeData[i] = 29 + (5 * random.nextDouble() - 3)

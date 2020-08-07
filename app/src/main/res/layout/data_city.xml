@@ -50,13 +50,13 @@
 
     <ImageView
         android:id="@+id/iv_Cloudiness"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
         android:layout_marginTop="10dp"
 
 
-        android:src="@drawable/ic_empty_24"
-        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_empty_24"
+        android:scaleType="centerCrop"
 
         app:layout_constraintStart_toStartOf="@+id/tv_CityName"
         app:layout_constraintTop_toBottomOf="@+id/tv_Cloudiness" />
@@ -68,8 +68,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
 
-        android:textColor="#000"
-        android:textSize="68sp"
+        android:textSize="58sp"
         app:layout_constraintStart_toEndOf="@+id/iv_Cloudiness"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_CityName"
@@ -81,8 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
 
-        android:textColor="#000"
-        android:textSize="28sp"
+        android:textSize="22sp"
         android:text="°C"
 
         app:layout_constraintStart_toEndOf="@+id/tv_Temperature"
@@ -93,7 +91,7 @@
         android:id="@+id/tv_Precipitation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
 
         android:text="Вероятность осадков:"
         android:textColor="#878787"
@@ -106,7 +104,7 @@
         android:id="@+id/tv_Humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
 
         android:text="@string/t_humidity"
         android:textColor="#878787"
@@ -119,7 +117,7 @@
         android:id="@+id/tv_Wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
 
         android:text="@string/t_wind"
         android:textColor="#878787"

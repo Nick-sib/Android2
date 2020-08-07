@@ -38,6 +38,18 @@ class CityListAdapter: RecyclerView.Adapter<CityViewHolder>() {
     }
 
     fun setData(request: WeatherRequest, dayWeek: String): WeatherData {
+        if (fullList.size == 0) {
+            val data = WeatherData("Новосибирск", request.id)
+            //это быстрая заглушка для пустого листа
+                data.isLoaded = true
+                data.dayWeek = dayWeek
+                data.overcast = request.weather[0].description.capitalize()
+                data.temp = request.main.temp.toInt()
+                data.humidity = request.main.humidity
+                data.wind = request.wind.speed
+                data.icon = "${request.weather[0].icon}"
+                return data
+        }
         for (data in fullList)
             if (data.id == request.id) {
                 data.isLoaded = true
@@ -46,7 +58,7 @@ class CityListAdapter: RecyclerView.Adapter<CityViewHolder>() {
                 data.temp = request.main.temp.toInt()
                 data.humidity = request.main.humidity
                 data.wind = request.wind.speed
-                data.icon = "w${request.weather[0].icon}2x"
+                data.icon = "${request.weather[0].icon}"
                 return data
             }
         return errorData
