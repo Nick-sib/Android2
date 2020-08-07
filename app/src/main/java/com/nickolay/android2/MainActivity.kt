@@ -5,19 +5,21 @@ import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.nickolay.android2.main.CityData
+import com.nickolay.android2.main.SelectCity
 import com.nickolay.android2.service.GetCityWeather
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+
 
 private const val PREFS_KEY = "theme"
 const val THEME_UNDEFINED = -1
@@ -40,10 +42,13 @@ class MainActivity:  AppCompatActivity() {
     fun changeFragment(index: Int){ //в последствии индекс заменить на фрагмент
         when (index) {
             1 -> {//changeCityList
+                supportFragmentManager.beginTransaction().replace(R.id.fragmentPlace,
+                    SelectCity.newInstance(0)).commit();
+
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
                 bottomAppBar.navigationIcon = null
-                screenLabel.text = resources.getText(R.string.s_mi_city_list)
+                //screenLabel.text = resources.getText(R.string.s_mi_city_list)
             }
             else -> {
                 fab.hide(addVisibilityChanged)
@@ -89,14 +94,15 @@ class MainActivity:  AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        //Log.d("myLOG", "onCreate: ${BuildConfig.WEATHER_API_KEY}")
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentPlace,
+            CityData.newInstance(0)).commit();
 
 
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+       /* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
             viewSensorValue.sensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
             viewSensorValue.sensorHimidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) // requires API level 14.
-        }
+        }*/
 
         initTheme()
 
@@ -146,13 +152,13 @@ class MainActivity:  AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorTemperature, SensorManager.SENSOR_DELAY_NORMAL)
-        mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorHimidity,    SensorManager.SENSOR_DELAY_NORMAL)
+        /*mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorTemperature, SensorManager.SENSOR_DELAY_NORMAL)
+        mSensorManager.registerListener(viewSensorValue, viewSensorValue.sensorHimidity,    SensorManager.SENSOR_DELAY_NORMAL)*/
     }
 
     override fun onPause() {
         super.onPause()
-        mSensorManager.unregisterListener(viewSensorValue)
+        //mSensorManager.unregisterListener(viewSensorValue)
     }
 
     private fun BottomAppBar.toggleFabAlignment() {
@@ -179,7 +185,8 @@ class MainActivity:  AppCompatActivity() {
                 val bottomNavDrawerFragment = BottomNavigationDrawerFragment(this)
                 bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
             }
-            R.id.mi_city_list -> showSnackMessage(resources.getText(R.string.s_mi_city_list))
+            R.id.mi_city_list ->
+                showSnackMessage(resources.getText(R.string.s_mi_city_list))
             R.id.mi_back -> {//не изменять список городов
                 changeFragment(0)}
             else -> showSnackMessage(item.title)
@@ -187,6 +194,7 @@ class MainActivity:  AppCompatActivity() {
 
         return true
     }
+
 
     fun doJob(view: View) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

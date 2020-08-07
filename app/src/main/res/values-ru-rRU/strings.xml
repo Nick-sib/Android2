@@ -15,6 +15,7 @@
     <string name="b_back">Вернуться</string>
     <string name="b_apply">Применить</string>
     <string name="invate_input_city_name">Введите имя города</string>
+    <string name="t_humidity">Влажность: %d%s</string>
 
     <string-array name="citys_array">
         <item>Амстердам,2759794</item>
@@ -63,4 +64,5 @@
         <item>Таллин,588409</item>
         <item>Хельсинки,658225</item>
     </string-array>
+    <string name="t_wind">Ветер: %.1f м/с</string>
 </resources>

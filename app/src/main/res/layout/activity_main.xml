@@ -6,7 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/content_main" />
+    <!--include
+        android:id="@+id/fragmentPlace" layout="@layout/content_main" /-->
+    <FrameLayout
+        android:id="@+id/fragmentPlace"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

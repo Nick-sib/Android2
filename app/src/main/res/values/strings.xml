@@ -65,4 +65,6 @@
         <item>Warsaw,756135</item>
         <item>Zagreb,3186886</item>
     </string-array>
+    <string name="t_humidity">Humidity: %d%s</string>
+    <string name="t_wind">Wind: %.1f m/s</string>
 </resources>
