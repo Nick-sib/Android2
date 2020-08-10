@@ -12,10 +12,10 @@ interface CityDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(cityTable: CityTable)
+    fun insert(cityTable: CityTable)
 
     @Query("DELETE FROM city_table")
-    suspend fun deleteAll()
+    fun deleteAll()
 
     @Update
     fun updateStudent(cityTable: CityTable)
