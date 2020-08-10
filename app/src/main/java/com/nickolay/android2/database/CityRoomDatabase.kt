@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import kotlinx.coroutines.CoroutineScope
+import java.util.concurrent.Executors
 
 
 @Database(entities = [CityTable::class], version = 1, exportSchema = false)
@@ -11,10 +13,18 @@ abstract class CityRoomDatabase: RoomDatabase() {
     abstract fun cityDao(): CityDao
 
     companion object {
+
         @Volatile
         private var INSTANCE: CityRoomDatabase? = null
+        private val NUMBER_OF_THREADS = 4
 
-        fun getDatabase(context: Context): CityRoomDatabase {
+        val databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS)
+
+        fun getDatabase(
+            context: Context,
+            scope: CoroutineScope
+        ): CityRoomDatabase {
             val tempInstance = INSTANCE
 
             if (tempInstance != null) {

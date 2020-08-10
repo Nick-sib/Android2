@@ -1,13 +1,15 @@
 package com.nickolay.android2.database
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface CityDao {
 
-    @Query("SELECT * from city_table ORDER BY _id ASC")
-    fun getAlphabetizedWords(): List<CityTable>
+    @Query("SELECT * from city_table ORDER BY city_name ASC")
+    fun getAlphabetizedWords(): LiveData<List<CityTable>>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cityTable: CityTable)
