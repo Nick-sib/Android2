@@ -1,6 +1,5 @@
 package com.nickolay.android2.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,16 +22,15 @@ class CityListAdapter: RecyclerView.Adapter<CityViewHolder>() {
 
     private var showedCity = -1
 
-    fun setLists(inArray: List<String>, default_id: Int){
-        if (workList.size == 0) {
+    fun setLists(inArray: List<String>, defaultId: Int){
+        if (workList.isNotEmpty()) {
             for (inData in inArray){
                 val s = inData.split(',')
-                workList.add(WeatherData(s[0],s[1].toInt()))
+                workList.add(WeatherData(s[0], s[1].toInt()))
                 workList[workList.size-1].apply {
-                    isCheck = id == default_id
+                    isCheck = id == defaultId
                     tmpCheck = isCheck
                 }
-
             }
             fullList = ArrayList(workList)}
     }

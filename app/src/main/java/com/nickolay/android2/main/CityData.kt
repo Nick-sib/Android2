@@ -16,7 +16,6 @@ import com.nickolay.android2.service.CommonWeather
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.data_city.*
-import java.util.*
 
 
 class
@@ -24,8 +23,8 @@ CityData : Fragment()/*, OnItemListClick*/ {
 
     lateinit var viewModel: WeatherViewModel
 
-    private lateinit var sHumidity: String
-    private lateinit var sWind: String
+    val sHumidity : String by lazy { resources.getString(R.string.t_humidity) }
+    val sWind : String by lazy { resources.getString(R.string.t_wind) }
     private lateinit var root: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +36,6 @@ CityData : Fragment()/*, OnItemListClick*/ {
             androidx.lifecycle.Observer {
                 compliteData(it)
             })
-
-        sHumidity = resources.getString(R.string.t_humidity)
-        sWind = resources.getString(R.string.t_wind)
         if (savedInstanceState == null) {
             CommonWeather.getData(WeatherViewModel.DEFAULT_ID, viewModel)
         }
@@ -52,7 +48,7 @@ CityData : Fragment()/*, OnItemListClick*/ {
         val uri = Uri.parse("https://openweathermap.org/img/wn/${data.icon}@4x.png")
         Picasso.get()!!
             .load(uri)
-            .into(root.findViewById<ImageView>(R.id.iv_Cloudiness), object : Callback {
+            .into(root.findViewById<ImageView>(R.id.ivCloudiness), object : Callback {
                 override fun onSuccess() {
                     Log.d("myLOG", "success")
                 }
@@ -62,12 +58,12 @@ CityData : Fragment()/*, OnItemListClick*/ {
                     Log.d("myLOG", e.toString())
                 }
             })
-        tv_CityName.text = data.cityName
-        tv_DayOfWeek.text = data.dayWeek
-        tv_Cloudiness.text = data.overcast
-        tv_Temperature.text = data.temp.toString()
-        tv_Humidity.text = String.format(sHumidity, data.humidity, "%")
-        tv_Wind.text = String.format(sWind, data.wind)
+        tvCityName.text = data.cityName
+        tvDayOfWeek.text = data.dayWeek
+        tvCloudiness.text = data.overcast
+        tvTemperature.text = data.temp.toString()
+        tvHumidity.text = String.format(sHumidity, data.humidity, "%")
+        tvWind.text = String.format(sWind, data.wind)
     }
 
     override fun onCreateView(

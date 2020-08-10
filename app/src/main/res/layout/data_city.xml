@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/tv_CityName"
+        android:id="@+id/tvCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -23,33 +23,33 @@
         android:text="Имя города, 000000" />
 
     <TextView
-        android:id="@+id/tv_DayOfWeek"
+        android:id="@+id/tvDayOfWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
 
         android:fontFamily="@font/amiko"
         android:textColor="#878787"
-        app:layout_constraintStart_toStartOf="@+id/tv_CityName"
+        app:layout_constraintStart_toStartOf="@+id/tvCityName"
 
-        app:layout_constraintTop_toBottomOf="@+id/tv_CityName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCityName"
         tools:text="среда" />
 
     <TextView
-        android:id="@+id/tv_Cloudiness"
+        android:id="@+id/tvCloudiness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
 
         android:fontFamily="@font/amiko"
         android:textColor="#878787"
-        app:layout_constraintStart_toStartOf="@+id/tv_CityName"
+        app:layout_constraintStart_toStartOf="@+id/tvCityName"
 
-        app:layout_constraintTop_toBottomOf="@+id/tv_DayOfWeek"
+        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek"
         tools:text="Переменная облачность" />
 
     <ImageView
-        android:id="@+id/iv_Cloudiness"
+        android:id="@+id/ivCloudiness"
         android:layout_width="120dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -58,24 +58,24 @@
         tools:src="@drawable/ic_empty_24"
         android:scaleType="centerCrop"
 
-        app:layout_constraintStart_toStartOf="@+id/tv_CityName"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Cloudiness" />
+        app:layout_constraintStart_toStartOf="@+id/tvCityName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCloudiness" />
 
     <TextView
-        android:id="@+id/tv_Temperature"
+        android:id="@+id/tvTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
 
         android:textSize="58sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_Cloudiness"
+        app:layout_constraintStart_toEndOf="@+id/ivCloudiness"
 
-        app:layout_constraintTop_toBottomOf="@+id/tv_CityName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCityName"
         tools:text="26" />
 
     <TextView
-        android:id="@+id/tv_TempVed"
+        android:id="@+id/tvTempVed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -83,12 +83,12 @@
         android:textSize="22sp"
         android:text="°C"
 
-        app:layout_constraintStart_toEndOf="@+id/tv_Temperature"
-        app:layout_constraintTop_toTopOf="@+id/tv_Temperature"/>
+        app:layout_constraintStart_toEndOf="@+id/tvTemperature"
+        app:layout_constraintTop_toTopOf="@+id/tvTemperature"/>
 
     <!--пока заглушка-->
     <TextView
-        android:id="@+id/tv_Precipitation"
+        android:id="@+id/tvPrecipitation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -97,11 +97,11 @@
         android:textColor="#878787"
         android:textSize="14sp"
 
-        app:layout_constraintStart_toEndOf="@+id/tv_TempVed"
-        app:layout_constraintTop_toTopOf="@+id/tv_Temperature"/>
+        app:layout_constraintStart_toEndOf="@+id/tvTempVed"
+        app:layout_constraintTop_toTopOf="@+id/tvTemperature"/>
 
     <TextView
-        android:id="@+id/tv_Humidity"
+        android:id="@+id/tvHumidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -110,11 +110,11 @@
         android:textColor="#878787"
         android:textSize="14sp"
 
-        app:layout_constraintStart_toEndOf="@+id/tv_TempVed"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Precipitation"/>
+        app:layout_constraintStart_toEndOf="@+id/tvTempVed"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecipitation"/>
 
     <TextView
-        android:id="@+id/tv_Wind"
+        android:id="@+id/tvWind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -123,8 +123,8 @@
         android:textColor="#878787"
         android:textSize="14sp"
 
-        app:layout_constraintStart_toEndOf="@+id/tv_TempVed"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Humidity"/>
+        app:layout_constraintStart_toEndOf="@+id/tvTempVed"
+        app:layout_constraintTop_toBottomOf="@+id/tvHumidity"/>
 
     <!--com.jako.android_meteo.meteo_views.LineChartView
         android:id="@+id/linechart"

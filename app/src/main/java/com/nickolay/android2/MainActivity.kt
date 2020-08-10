@@ -42,8 +42,12 @@ class MainActivity:  AppCompatActivity() {
     fun changeFragment(index: Int){ //в последствии индекс заменить на фрагмент
         when (index) {
             1 -> {//changeCityList
-                supportFragmentManager.beginTransaction().replace(R.id.fragmentPlace,
-                    SelectCity.newInstance(0)).commit();
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(
+                        R.id.fragmentPlace,
+                        SelectCity.newInstance(0))
+                    .commit();
 
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
