@@ -30,8 +30,6 @@ abstract class CityRoomDatabase: RoomDatabase() {
                     CityRoomDatabase::class.java,
                     "word_database"
                 )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
                     .fallbackToDestructiveMigration()
                     .addCallback(CityDatabaseCallback(scope))
                     .build()

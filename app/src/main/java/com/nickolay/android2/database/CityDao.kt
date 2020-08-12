@@ -8,7 +8,7 @@ import androidx.room.*
 interface CityDao {
 
     @Query("SELECT * from city_table ORDER BY city_name ASC")
-    fun getAlphabetizedWords(): LiveData<List<CityTable>>
+    fun getAlphabetizedWords(): LiveData<ArrayList<CityTable>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

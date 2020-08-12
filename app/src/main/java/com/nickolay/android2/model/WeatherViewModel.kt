@@ -13,12 +13,13 @@ import com.nickolay.android2.database.CityRoomDatabase
 import com.nickolay.android2.database.CityTable
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class WeatherViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: CityRepository
-    val allCitys: LiveData<List<CityTable>>
+    val allCitys: LiveData<ArrayList<CityTable>>
 
 
     val adapter = CityListAdapter()
