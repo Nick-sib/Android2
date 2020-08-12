@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jako.android_meteo.adapters.CityViewHolder
 import com.nickolay.android2.R
+import com.nickolay.android2.database.CityTable
 import com.nickolay.android2.model.WeatherData
 import com.nickolay.android2.model.WeatherRequest
 
@@ -15,7 +16,7 @@ import kotlin.collections.ArrayList
 class CityListAdapter: RecyclerView.Adapter<CityViewHolder>() {
     private val errorData = WeatherData("Request",0)
 
-    private var workList: ArrayList<WeatherData> = arrayListOf()
+    public var workList: ArrayList<WeatherData> = arrayListOf()
     private var fullList: ArrayList<WeatherData> = ArrayList(workList)
 
     var onItemListClickListener: OnItemListClick? = null
@@ -123,6 +124,13 @@ class CityListAdapter: RecyclerView.Adapter<CityViewHolder>() {
             data.tmpCheck = data.isCheck
         }
         notifyDataSetChanged()
+    }
+
+    fun setCitys(CitysList: ArrayList<CityTable>) {
+        fullList.clear()
+        for (data in CitysList) {
+            fullList.add(WeatherData(data.city_name,data.id))
+        }
     }
 
 
